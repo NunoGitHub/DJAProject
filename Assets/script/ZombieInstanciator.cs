@@ -48,17 +48,21 @@ public class ZombieInstanciator : MonoBehaviour
                 Vector3 distance = rbPlayer.transform.position - child.transform.position;
                 if (child.GetChild(18).GetComponent<SensorPlayer>().startSeek==true)// sai do flocking
                 {
-                    child.transform.parent = null;
+                  //  child.transform.parent = null;//provavelment não vai fazer nada
 
                 }
-                if (distance.magnitude <= 20)// começam a preseguir o player
+                if (distance.magnitude <= 25 && child.parent.name=="Flocking")// começam a preseguir o player
                 {
                     startFlocking = true;
+                    child.GetChild(18).GetComponent<SensorPlayer>().startSeek = true;
+                    
+                    if (distance.magnitude <= 10) child.transform.parent = null;//deixam de ter pai
 
                 }
             }
-            i++;
+            
         }
+        i++;
         if (i == number)
         {
             i = 0;

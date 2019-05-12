@@ -26,8 +26,9 @@ public class Ai : MonoBehaviour
     {
         
         Debug.Log("mes is stopped =" + agent.isStopped);
-        Transform child = transform.GetChild(18);//-> indice do filho do isWallAvoidance;
+        Transform child = transform.GetChild(18);
         bool startSeek = child.GetComponent<SensorPlayer>().startSeek;
+        
         if (startSeek == true)
         {
             agent.SetDestination(GameObject.Find("gajo").transform.position);

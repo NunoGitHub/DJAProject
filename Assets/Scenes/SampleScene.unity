@@ -2792,6 +2792,7 @@ GameObject:
   - component: {fileID: 1327568028}
   - component: {fileID: 1327568027}
   - component: {fileID: 1327568026}
+  - component: {fileID: 1327568029}
   m_Layer: 0
   m_Name: Flocking
   m_TagString: Untagged
@@ -2813,7 +2814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 1783367084}
   number: 5
-  rbPlayer: {fileID: 0}
+  rbPlayer: {fileID: 640623137}
   startFlocking: 0
   maxSpeed: 2
   velocity: {x: 0, y: 0, z: 0}
@@ -2832,7 +2833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 1783367084}
   number: 5
-  rbPlayer: {fileID: 0}
+  rbPlayer: {fileID: 640623137}
   startFlocking: 0
 --- !u!4 &1327568028
 Transform:
@@ -2848,6 +2849,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0.91200006, y: 0, z: 0}
+--- !u!195 &1327568029
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327568025}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1487838983
 GameObject:
   m_ObjectHideFlags: 0

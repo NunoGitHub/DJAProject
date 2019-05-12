@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class Boid : ZombieInstanciator
 {
     
     public int maxSpeed = 2;
     //NavMeshAgent agent;
-
+    NavMeshAgent agent;
 
     [HideInInspector] public Vector3 velocity;
     [HideInInspector] public Transform tr;
@@ -29,13 +30,15 @@ public class Boid : ZombieInstanciator
         //agent = transform.GetComponent<NavMeshAgent>();
         //  InvokeRepeating("CalculateVelocity", Random.value * tick, tick);
 
+        agent = GetComponent<NavMeshAgent>();
     }
     
     void Update()
     {
-        //if (startFlocking == true)
-        //{
-        //    agent.SetDestination(GameObject.Find("gajo").transform.position);
+        if (startFlocking == true)
+        {//agent.SetDestination(new Vector3(Random.Range(600.0f, 700.0f), 32.3f, Random.Range(2400.0f, 2450.0f)));
+            agent.SetDestination(GameObject.Find("gajo").transform.position);
+        }
         //}
     }
 
