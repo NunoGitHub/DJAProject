@@ -8,15 +8,16 @@ public class Ai : MonoBehaviour
     public Rigidbody rbZombie;
     public Rigidbody rbPlayer;
     // unsafe int* f;
-     bool startSeek = false;
+     bool startSeek = false, isInicialDest=false;
     private bool isWallAvoidance;
-    Vector3 destination;
+    private Vector3 destination, startPos;
     NavMeshAgent agent;
+    
     
 
     private void Start()
     {
-        
+        startPos = transform.position;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -44,7 +45,10 @@ public class Ai : MonoBehaviour
             if (Vector3.Distance(agent.transform.position, agent.destination) > 60.0f)
             {
                 Debug.Log("HE DISAPPEARED! NANI!??!?!");
-              //  child.GetComponent<SensorPlayer>().startSeek = false;
+                agent.SetDestination(startPos);
+                isInicialDest = true;
+               
+                //child.GetComponent<SensorPlayer>().startSeek = false;
             }
         }
         else
@@ -54,6 +58,16 @@ public class Ai : MonoBehaviour
             if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
                 agent.SetDestination(new Vector3(Random.Range(600.0f, 700.0f), 32.3f, Random.Range(2400.0f, 2450.0f)));
         }
+        
+       if (agent.remainingDistance <= 1 && isInicialDest == true)
+       {
+
+
+       child.GetComponent<SensorPlayer>().startSeek = false;
+       isInicialDest = false;
+                
+       }
+        
 
     }
   
