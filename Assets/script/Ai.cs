@@ -18,7 +18,9 @@ public class Ai : MonoBehaviour
     private void Start()
     {
         startPos = transform.position;
+
         agent = GetComponent<NavMeshAgent>();
+        if (transform.parent != null) agent.enabled = false;
     }
 
 
@@ -29,7 +31,7 @@ public class Ai : MonoBehaviour
         Debug.Log("mes is stopped =" + agent.isStopped);
         Transform child = transform.GetChild(18);
         bool startSeek = child.GetComponent<SensorPlayer>().startSeek;
-        
+        if(transform.parent == null)
         if (startSeek == true)
         {
             agent.SetDestination(GameObject.Find("gajo").transform.position);
@@ -53,13 +55,16 @@ public class Ai : MonoBehaviour
         }
         else
         { //VAI ANDAR AS VOLTAS DENTRO DO RETANGULO (600~700 X 2400~2450) - WANDERING
-            agent.SetDestination(new Vector3(Random.Range(600.0f, 700.0f), 32.3f, Random.Range(2400.0f, 2450.0f)));
+            if (transform.parent == null)
+            {
+                agent.SetDestination(new Vector3(Random.Range(this.transform.position.x, this.transform.position.x + 20), this.transform.position.y, Random.Range(this.transform.position.z, this.transform.position.z + 20)));
 
-            if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
-                agent.SetDestination(new Vector3(Random.Range(600.0f, 700.0f), 32.3f, Random.Range(2400.0f, 2450.0f)));
+                if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
+                    agent.SetDestination(new Vector3(Random.Range(this.transform.position.x, this.transform.position.x + 20), this.transform.position.y, Random.Range(this.transform.position.z, this.transform.position.z + 20)));
+            }
         }
-        
-       if (agent.remainingDistance <= 1 && isInicialDest == true)
+
+        if (agent.remainingDistance <= 1 && isInicialDest == true)
        {
         child.GetComponent<SensorPlayer>().startSeek = false;
          isInicialDest = false;      

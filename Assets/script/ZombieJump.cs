@@ -14,7 +14,7 @@ public class ZombieJump : MonoBehaviour
     public int jumpForce, directionForce ;
     Transform parent;
     float yAngle = 0;
-    NavMeshAgent meshAg;
+    //NavMeshAgent meshAg;
     void Start()
     {
         /* directionForce = 80;
@@ -31,7 +31,7 @@ public class ZombieJump : MonoBehaviour
     {
         // rbZombie.transform.rotation = Quaternion.Euler(0, rbZombie.transform.rotation.y, 0);
        
-        UpdateJump();
+       
     }
     void OnTriggerEnter(Collider collision)
     {
@@ -52,17 +52,17 @@ public class ZombieJump : MonoBehaviour
     }
     void UpdateJump()
     {
-
+        
         Transform parent = transform.parent;
-         meshAg = parent.GetComponent<NavMeshAgent>();
+       //  meshAg = parent.GetComponent<NavMeshAgent>();
         timeGround += Time.deltaTime;
         Vector3 dir = rbPlayer.transform.position - rbZombie.transform.position;
         //Quaternion target = Quaternion.LookRotation(dir);
         //rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
-        rbZombie.transform.rotation = Quaternion.LookRotation(dir);
+        rbZombie.transform.rotation = Quaternion.LookRotation(dir);//->erro
         if (this.zombieJump == true && timeJump >= 1f)// quando o colider colide contra um muro salta para apanhar o player
         {
-            meshAg.enabled = false;
+            parent.GetComponent<NavMeshAgent>().enabled = false;
             rbZombie.transform.rotation = Quaternion.LookRotation(dir);
             //rbZombie.freezeRotation = true;
 
@@ -75,16 +75,17 @@ public class ZombieJump : MonoBehaviour
             timeGround = 0;
         }
         timeJump += Time.deltaTime;
+      
         if (timeGround >= 1 && transform.GetChild(0).GetComponent<SartNavMesh>().startNavMesh==true )
         {
-            meshAg.enabled = true;
+        //    parent.GetComponent<NavMeshAgent>().enabled = true;
             timeGround = 0;
         }
     }
     private void FixedUpdate()
     {
-           
-        
+        UpdateJump();
+
     }
 
 
