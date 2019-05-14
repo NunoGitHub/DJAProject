@@ -56,6 +56,7 @@ public class ZombieJump : MonoBehaviour
         timeGround += Time.deltaTime;
         Vector3 dir = rbPlayer.transform.position - rbZombie.transform.position;
 <<<<<<< HEAD
+<<<<<<< HEAD
         //Quaternion target = Quaternion.LookRotation(dir);
         //rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
         rbZombie.transform.rotation = Quaternion.LookRotation(dir);//->erro
@@ -63,6 +64,12 @@ public class ZombieJump : MonoBehaviour
         {
             parent.GetComponent<NavMeshAgent>().enabled = false;
             rbZombie.transform.rotation = Quaternion.LookRotation(dir);
+=======
+        Quaternion target = Quaternion.LookRotation(dir);
+        rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
+        if (zombieJump == true && timeJump >= 1f)// quando o colider colide contra um muro salta para apanhar o player
+        {
+>>>>>>> parent of 046c642... some fixes
 =======
         Quaternion target = Quaternion.LookRotation(dir);
         rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
