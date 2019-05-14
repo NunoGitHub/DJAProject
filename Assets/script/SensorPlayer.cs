@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class SensorPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool startSeek = false;
+    public  bool startSeek = false;
+    public  bool startSeekRead = false;
     // unsafe int* f;
     private  bool isWallAvoidance;
     Vector3 destination;
@@ -22,7 +23,7 @@ public class SensorPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        startSeekRead = startSeek;
     }
     void OnTriggerEnter(Collider collision)
     {

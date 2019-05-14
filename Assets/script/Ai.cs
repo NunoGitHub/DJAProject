@@ -8,7 +8,7 @@ public class Ai : MonoBehaviour
     public Rigidbody rbZombie;
     public Rigidbody rbPlayer;
     // unsafe int* f;
-     bool startSeek = false, isInicialDest=false;
+    private  bool startSeek = false, isInicialDest=false;
     private bool isWallAvoidance;
     private Vector3 destination, startPos;
     NavMeshAgent agent;
@@ -18,9 +18,7 @@ public class Ai : MonoBehaviour
     private void Start()
     {
         startPos = transform.position;
-
         agent = GetComponent<NavMeshAgent>();
-        if (transform.parent != null) agent.enabled = false;
     }
 
 
@@ -28,12 +26,12 @@ public class Ai : MonoBehaviour
     void Update()
     {
         
-        Debug.Log("mes is stopped =" + agent.isStopped);
+       //    Debug.Log("mes is stopped =" + agent.isStopped);
         Transform child = transform.GetChild(18);
         bool startSeek = child.GetComponent<SensorPlayer>().startSeek;
-        if(transform.parent == null)
+        
         if (startSeek == true)
-        {
+        {   if(agent.enabled==true)
             agent.SetDestination(GameObject.Find("gajo").transform.position);
 
             if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
@@ -46,7 +44,7 @@ public class Ai : MonoBehaviour
 
             if (Vector3.Distance(agent.transform.position, agent.destination) > 60.0f)
             {
-                Debug.Log("HE DISAPPEARED! NANI!??!?!");
+              //  Debug.Log("HE DISAPPEARED! NANI!??!?!");
                 agent.SetDestination(startPos);
                 isInicialDest = true;
                
@@ -55,22 +53,16 @@ public class Ai : MonoBehaviour
         }
         else
         { //VAI ANDAR AS VOLTAS DENTRO DO RETANGULO (600~700 X 2400~2450) - WANDERING
-            if (transform.parent == null)
-            {
-                agent.SetDestination(new Vector3(Random.Range(this.transform.position.x, this.transform.position.x + 20), this.transform.position.y, Random.Range(this.transform.position.z, this.transform.position.z + 20)));
+            agent.SetDestination(new Vector3(Random.Range(600.0f, 700.0f), 32.3f, Random.Range(2400.0f, 2450.0f)));
 
-                if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
-                    agent.SetDestination(new Vector3(Random.Range(this.transform.position.x, this.transform.position.x + 20), this.transform.position.y, Random.Range(this.transform.position.z, this.transform.position.z + 20)));
-            }
+            if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
+                agent.SetDestination(new Vector3(Random.Range(600.0f, 700.0f), 32.3f, Random.Range(2400.0f, 2450.0f)));
         }
-
-        if (agent.remainingDistance <= 1 && isInicialDest == true)
+        
+       if (agent.remainingDistance <= 1 && isInicialDest == true)
        {
-
-
-       child.GetComponent<SensorPlayer>().startSeek = false;
-       isInicialDest = false;
-                
+        child.GetComponent<SensorPlayer>().startSeek = false;
+         isInicialDest = false;      
        }
         
 

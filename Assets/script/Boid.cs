@@ -36,18 +36,12 @@ public class Boid : ZombieInstanciator
     void Update()
     {
         if (startFlocking == true)
-        {
+        {//agent.SetDestination(new Vector3(Random.Range(600.0f, 700.0f), 32.3f, Random.Range(2400.0f, 2450.0f)));
             agent.SetDestination(GameObject.Find("gajo").transform.position);
         }
-        else {
-            
-         //   agent.SetDestination(new Vector3(Random.Range(this.transform.position.x - 5, this.transform.position.x + 5), this.transform.position.y, Random.Range(this.transform.position.z - 5, this.transform.position.z + 5)));
-
-         /*   if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
-                agent.SetDestination(new Vector3(Random.Range(this.transform.position.x - 5, this.transform.position.x + 5), this.transform.position.y, Random.Range(this.transform.position.z, this.transform.position.z + 5)));*/
-        }
+        //}
     }
-    /*
+
     Vector3 Steering() {
         Vector3 desiredVel = rbPlayer.transform.position - tr.transform.position;
         if (desiredVel.magnitude < 2) distance = true; else distance= false;
@@ -62,5 +56,5 @@ public class Boid : ZombieInstanciator
 
     }
 
-  */
+  
 }

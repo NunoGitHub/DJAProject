@@ -10,17 +10,20 @@ public class ZombieJump : MonoBehaviour
     
     public Rigidbody rbZombie, rbPlayer;
     public  bool zombieJump;
-    private  float timeJump = 0, timeGround =0;
-    public int jumpForce, directionForce ;
+    private static  float timeJump = 0, timeGround =0;
+     int jumpForce, directionForce ;
     Transform parent;
     float yAngle = 0;
-    //NavMeshAgent meshAg;
+    NavMeshAgent meshAg;
+    public  static string nameZomb;
     void Start()
     {
-        directionForce = 35;
-        jumpForce = 7;
+        /* directionForce = 80;
+         jumpForce = 5;*/
+        directionForce = 2950;
+        jumpForce = 300;
         zombieJump = false;
-        Physics.IgnoreCollision(rbZombie.GetComponent<Collider>(), GetComponent<Collider>());
+       // Physics.IgnoreCollision(transform.parent.GetChild(21).GetComponent<Collider>(), GetComponent<Collider>());
         yAngle = rbZombie.transform.eulerAngles.y;
     }
 
@@ -28,8 +31,9 @@ public class ZombieJump : MonoBehaviour
     void Update()
     {
         // rbZombie.transform.rotation = Quaternion.Euler(0, rbZombie.transform.rotation.y, 0);
-       
-       
+       if(nameZomb== transform.parent.name)
+        UpdateJump();   
+        
     }
     void OnTriggerEnter(Collider collision)
     {
@@ -37,11 +41,13 @@ public class ZombieJump : MonoBehaviour
         if (collision.gameObject.tag == "ground")
         {
             zombieJump = true;
+            nameZomb = transform.parent.name;
            // meshAg.radius = 0;
         }
 
     }
-    void OnTriggerExit(Collider collision)
+  
+     void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.tag == "ground")
         {
@@ -50,53 +56,41 @@ public class ZombieJump : MonoBehaviour
     }
     void UpdateJump()
     {
-        
+        timeJump += Time.deltaTime;
         Transform parent = transform.parent;
-       //  meshAg = parent.GetComponent<NavMeshAgent>();
+         meshAg = parent.GetComponent<NavMeshAgent>();
         timeGround += Time.deltaTime;
         Vector3 dir = rbPlayer.transform.position - rbZombie.transform.position;
-<<<<<<< HEAD
-<<<<<<< HEAD
         //Quaternion target = Quaternion.LookRotation(dir);
         //rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
-        rbZombie.transform.rotation = Quaternion.LookRotation(dir);//->erro
-        if (this.zombieJump == true && timeJump >= 1f)// quando o colider colide contra um muro salta para apanhar o player
+       
+           // rbZombie.transform.rotation = Quaternion.LookRotation(dir);
+        
+        if (zombieJump == true && transform.GetChild(0).GetComponent<SartNavMesh>().startNavMesh == true)// quando o colider colide contra um muro salta para apanhar o player
         {
-            parent.GetComponent<NavMeshAgent>().enabled = false;
-            rbZombie.transform.rotation = Quaternion.LookRotation(dir);
-=======
-        Quaternion target = Quaternion.LookRotation(dir);
-        rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
-        if (zombieJump == true && timeJump >= 1f)// quando o colider colide contra um muro salta para apanhar o player
-        {
->>>>>>> parent of 046c642... some fixes
-=======
-        Quaternion target = Quaternion.LookRotation(dir);
-        rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
-        if (zombieJump == true && timeJump >= 1f)// quando o colider colide contra um muro salta para apanhar o player
-        {
->>>>>>> parent of 046c642... some fixes
-            //rbZombie.freezeRotation = true;
+
             
             meshAg.enabled = false;
-           // rbZombie.transform.rotation = Quaternion.Euler(0, 0, Input.GetAxis("Horizontal"));
-              rbZombie.AddForce(rbZombie.transform.up * jumpForce, ForceMode.Impulse);
-             rbZombie.AddForce(dir.normalized * directionForce, ForceMode.Impulse);
+            rbZombie.transform.rotation = Quaternion.LookRotation(dir.normalized);
+            rbZombie.AddForce(rbZombie.transform.up * jumpForce, ForceMode.Impulse);
+            rbZombie.AddForce(dir.normalized * directionForce, ForceMode.Impulse);
+            //rbZombie.freezeRotation = true;
             timeJump = 0;
             zombieJump = false;
             timeGround = 0;
         }
         timeJump += Time.deltaTime;
-      
         if (timeGround >= 1 && transform.GetChild(0).GetComponent<SartNavMesh>().startNavMesh==true )
         {
-        //    parent.GetComponent<NavMeshAgent>().enabled = true;
+            meshAg.enabled = true;
+            meshAg.updateRotation = true;
             timeGround = 0;
+            transform.parent.GetChild(18).GetComponent<SensorPlayer>().startSeek = true;
         }
     }
     private void FixedUpdate()
     {
-        UpdateJump();
+        
 
     }
 
