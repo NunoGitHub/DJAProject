@@ -17,12 +17,10 @@ public class ZombieJump : MonoBehaviour
     //NavMeshAgent meshAg;
     void Start()
     {
-        /* directionForce = 80;
-         jumpForce = 5;*/
-        directionForce = 4800;
-        jumpForce = 300;
+        directionForce = 35;
+        jumpForce = 7;
         zombieJump = false;
-        //Physics.IgnoreCollision(rbZombie.GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreCollision(rbZombie.GetComponent<Collider>(), GetComponent<Collider>());
         yAngle = rbZombie.transform.eulerAngles.y;
     }
 
@@ -57,6 +55,7 @@ public class ZombieJump : MonoBehaviour
        //  meshAg = parent.GetComponent<NavMeshAgent>();
         timeGround += Time.deltaTime;
         Vector3 dir = rbPlayer.transform.position - rbZombie.transform.position;
+<<<<<<< HEAD
         //Quaternion target = Quaternion.LookRotation(dir);
         //rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
         rbZombie.transform.rotation = Quaternion.LookRotation(dir);//->erro
@@ -64,9 +63,15 @@ public class ZombieJump : MonoBehaviour
         {
             parent.GetComponent<NavMeshAgent>().enabled = false;
             rbZombie.transform.rotation = Quaternion.LookRotation(dir);
+=======
+        Quaternion target = Quaternion.LookRotation(dir);
+        rbZombie.transform.rotation = Quaternion.Lerp(rbZombie.transform.rotation, target, 0);
+        if (zombieJump == true && timeJump >= 1f)// quando o colider colide contra um muro salta para apanhar o player
+        {
+>>>>>>> parent of 046c642... some fixes
             //rbZombie.freezeRotation = true;
-
             
+            meshAg.enabled = false;
            // rbZombie.transform.rotation = Quaternion.Euler(0, 0, Input.GetAxis("Horizontal"));
               rbZombie.AddForce(rbZombie.transform.up * jumpForce, ForceMode.Impulse);
              rbZombie.AddForce(dir.normalized * directionForce, ForceMode.Impulse);

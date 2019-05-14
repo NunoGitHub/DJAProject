@@ -8,7 +8,7 @@ public class Ai : MonoBehaviour
     public Rigidbody rbZombie;
     public Rigidbody rbPlayer;
     // unsafe int* f;
-    private  bool startSeek = false, isInicialDest=false;
+     bool startSeek = false, isInicialDest=false;
     private bool isWallAvoidance;
     private Vector3 destination, startPos;
     NavMeshAgent agent;
@@ -66,8 +66,11 @@ public class Ai : MonoBehaviour
 
         if (agent.remainingDistance <= 1 && isInicialDest == true)
        {
-        child.GetComponent<SensorPlayer>().startSeek = false;
-         isInicialDest = false;      
+
+
+       child.GetComponent<SensorPlayer>().startSeek = false;
+       isInicialDest = false;
+                
        }
         
 
