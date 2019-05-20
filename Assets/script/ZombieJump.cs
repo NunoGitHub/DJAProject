@@ -41,7 +41,7 @@ public class ZombieJump : MonoBehaviour
         if (collision.gameObject.tag == "ground")
         {
             zombieJump = true;
-            nameZomb = transform.parent.name;
+            nameZomb = transform.parent.name;//para que apenas o zombie que colide seja afetado e não todos 
            // meshAg.radius = 0;
         }
 
@@ -71,9 +71,23 @@ public class ZombieJump : MonoBehaviour
 
             
             meshAg.enabled = false;
-            rbZombie.transform.rotation = Quaternion.LookRotation(dir.normalized);
-            rbZombie.AddForce(rbZombie.transform.up * jumpForce, ForceMode.Impulse);
-            rbZombie.AddForce(dir.normalized * directionForce, ForceMode.Impulse);
+           
+                
+
+          
+            if (transform.parent.GetChild(18).GetComponent<SensorPlayer>().startSeek == true)//para que quando salte e estiver a perseguir o jogador , salte na direção certa
+            {
+                rbZombie.transform.rotation = Quaternion.LookRotation(dir.normalized);
+                rbZombie.AddForce(rbZombie.transform.up * jumpForce, ForceMode.Impulse);
+                rbZombie.AddForce(dir.normalized * directionForce, ForceMode.Impulse);
+            }
+            else// para saltar na direção que o zombie estiver a andar
+            {
+                rbZombie.AddForce(transform.parent.forward * directionForce, ForceMode.Impulse);
+                rbZombie.AddForce(rbZombie.transform.up * jumpForce, ForceMode.Impulse);
+               
+                rbZombie.AddForce(-transform.parent.forward* directionForce, ForceMode.Impulse);
+            }
             //rbZombie.freezeRotation = true;
             timeJump = 0;
             zombieJump = false;
@@ -86,6 +100,7 @@ public class ZombieJump : MonoBehaviour
             meshAg.updateRotation = true;
             timeGround = 0;
             transform.parent.GetChild(18).GetComponent<SensorPlayer>().startSeek = true;
+            //transform.parent.GetChild(18).GetComponent<SensorPlayer>().startSeek = true;
         }
     }
     private void FixedUpdate()

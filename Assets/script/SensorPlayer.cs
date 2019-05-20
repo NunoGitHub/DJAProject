@@ -28,7 +28,9 @@ public class SensorPlayer : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "player")
-                startSeek = true;// quando o player entra na area do zombie e começa a ser perseguido pelo mesmo
+        {
+            startSeek = true;// quando o player entra na area do zombie e começa a ser perseguido pelo mesmo
+        }
     }
     public void  IsWallAvoidance(ref bool isTrue) {
         isWallAvoidance = isTrue;
