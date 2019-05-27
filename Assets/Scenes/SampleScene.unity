@@ -3041,6 +3041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rbZombie: {fileID: 1498312423}
   rbPlayer: {fileID: 640623137}
+  health: 100
 --- !u!54 &1498312423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3057,6 +3058,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1498312424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498312419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79cc62421dea42e479f1b4b5709e922c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1516778522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,6 +3701,25 @@ MonoBehaviour:
   rbZombie: {fileID: 1498312423}
   rbPlayer: {fileID: 640623137}
   zombieJump: 0
+--- !u!1 &1693103210 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: fe2eb0b4e90413643a3ddc78c368140f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1783367083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1693103213
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693103210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.17536752, y: 0.30772576, z: 0.35392442}
+  m_Center: {x: -0.00000061971724, y: -0.01547917, z: 1.6402477}
 --- !u!1 &1716801237
 GameObject:
   m_ObjectHideFlags: 0
@@ -3860,6 +3892,10 @@ PrefabInstance:
     - target: {fileID: 100080, guid: fe2eb0b4e90413643a3ddc78c368140f, type: 3}
       propertyPath: m_TagString
       value: zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fe2eb0b4e90413643a3ddc78c368140f, type: 3}
+      propertyPath: m_TagString
+      value: zombieHead
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: fe2eb0b4e90413643a3ddc78c368140f, type: 3}
       propertyPath: m_LocalPosition.x

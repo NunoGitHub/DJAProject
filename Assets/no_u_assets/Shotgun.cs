@@ -63,7 +63,7 @@ public class Shotgun : WeaponScript
             if (Physics.Raycast(ray, out hit))
             {                    
                 if (hit.transform.tag == "zombie")
-                        Debug.Log("Hit");
+                    zombieHealth.DealDamage("Shotgun", hit.transform.gameObject, Vector3.Distance(ray.origin, hit.transform.position));
             }
         }
     }

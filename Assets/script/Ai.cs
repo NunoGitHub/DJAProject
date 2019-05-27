@@ -12,6 +12,7 @@ public class Ai : MonoBehaviour
     private bool isWallAvoidance;
     private Vector3 destination, startPos;
     NavMeshAgent agent;
+    public float health = 100.0f;
     
     
 
