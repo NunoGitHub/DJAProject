@@ -65,7 +65,7 @@ namespace Assets
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == "zombie")
-                    Debug.Log("Hit");
+                    zombieHealth.DealDamage("Revolver", hit.transform.gameObject, Vector3.Distance(ray.origin, hit.transform.position));
             }
         }
 

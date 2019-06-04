@@ -10,6 +10,7 @@ TagManager:
   - zombie
   - Cube
   - Zombie
+  - zombieHead
   layers:
   - Default
   - TransparentFX

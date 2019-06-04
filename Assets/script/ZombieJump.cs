@@ -18,6 +18,9 @@ public class ZombieJump : MonoBehaviour
     public  static string nameZomb;
     void Start()
     {
+        //TESTING GITHUB PUSH - JOÃO FRANCISCO
+
+
         /* directionForce = 80;
          jumpForce = 5;*/
         directionForce = 2950;
