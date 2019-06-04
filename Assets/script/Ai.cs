@@ -37,13 +37,13 @@ public class Ai : MonoBehaviour
             if (agent.enabled==true)
             agent.SetDestination(GameObject.Find("gajo").transform.position);
 
-            if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
+          /*  if (Vector3.Distance(agent.transform.position, agent.destination) < 5.0f)
                 agent.isStopped = true; //VAI ATACAR!!!!
             else
             {
                 if (agent.isStopped == true)
                     agent.isStopped = false;
-            }
+            }*/
 
           
         }
