@@ -2654,6 +2654,7 @@ MonoBehaviour:
   turnSpeed: 1.5
   camera: {fileID: 534669902}
   canJump: 0
+  healthCount: {fileID: 1068667111}
 --- !u!4 &640623135
 Transform:
   m_ObjectHideFlags: 0
