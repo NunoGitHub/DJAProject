@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour
 {
@@ -11,15 +13,22 @@ public class MovementController : MonoBehaviour
     [SerializeField] bool canJump = false;
     float fallMult = 2.5f;
     float rotationY = 0;
+    float health, maxHealth = 100.0f;
+    float timer = 0.0f;
+    public TextMeshProUGUI healthCount;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        health = maxHealth;
+        healthCount.text = "Health: " + health;
     }
 
     private void FixedUpdate()
     {
+        timer += Time.deltaTime;
+
         float movX = Input.GetAxisRaw("Horizontal");                                                                                                    //Input esquerda/direita
         float movZ = Input.GetAxisRaw("Vertical");                                                                                                      //Input frente/tras
         Vector3 xMov = transform.right * movX;                                                                                                          //Movimento esquerda/direita
@@ -36,7 +45,12 @@ public class MovementController : MonoBehaviour
             rb.velocity += new Vector3(0, 5, 0);
         if (rb.velocity.y < 0)
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMult - 1) * Time.fixedDeltaTime;
-        }
+
+        Debug.Log(health);
+
+        if (health <= 0.0f)
+            SceneManager.LoadScene("SampleScene");
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -63,5 +77,15 @@ public class MovementController : MonoBehaviour
         }
         if (contactN == contact.Length)
             canJump = false;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.tag == "zombie" && timer >= 2.0f)
+        {
+            timer = 0.0f;
+            health -= 10.0f;
+            healthCount.text = "Health: " + health;
+        }
     }
 }

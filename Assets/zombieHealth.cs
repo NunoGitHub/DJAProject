@@ -21,11 +21,11 @@ public class zombieHealth : MonoBehaviour
     public static void DealDamage(string weapon, GameObject obj, float distance)
     {
         if (weapon == "Rifle")
-            obj.GetComponent<zombieHealth>().health -= 20.0f / (distance * 0.2f);
+            obj.GetComponent<zombieHealth>().health -= 20.0f / (distance * 0.3f);
         else if (weapon == "Revolver")
-            obj.GetComponent<zombieHealth>().health -= 45.0f / (distance * 0.01f);
+            obj.GetComponent<zombieHealth>().health -= 40.0f / (distance * 0.15f);
         else if (weapon == "Shotgun")
-            obj.GetComponent<zombieHealth>().health -= 5.0f / (distance * 0.5f);
+            obj.GetComponent<zombieHealth>().health -= 4.0f / (distance * 0.1f);
 
         Debug.Log(obj.GetComponent<zombieHealth>().health);
 
